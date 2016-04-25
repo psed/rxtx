@@ -5,6 +5,8 @@ const uint64_t pipe = 0xE8E8F0F0E1LL;
 #define JOYSTICK_X A0
 #define JOYSTICK_Y A1
 
+RF24 radio(CE_PIN, CSN_PIN);
+
 int command[2];
 int rawJoystick0;
 int rawJoystick1;

@@ -1,14 +1,12 @@
 #include <SPI.h>
 #include <nRF24L01.h>
-#include <RF24.h>
 #include <Servo.h>
 #include "constants.h"
+#include "radio.h"
 
 void setup()
 {
-  radio.begin();
-  radio.openReadingPipe(1,pipe);
-  radio.startListening();
+  startRadio();
   myservo.attach(0); 
   myservo1.attach(1);
 }
