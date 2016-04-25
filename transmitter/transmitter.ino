@@ -1,12 +1,7 @@
 #include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
-#define CE_PIN 9
-#define CSN_PIN 10
-#define JOYSTICK_X A0
-
-const uint64_t pipe = 0xE8E8F0F0E1LL;
-int joystick[1];
+#include "constants.h"
 
 RF24 radio(CE_PIN, CSN_PIN);
 
@@ -18,6 +13,9 @@ void setup()
 
 void loop()
 {
-  joystick[0] = analogRead(JOYSTICK_X);
-  radio.write(joystick, sizeof(joystick));
+  rawJoystick0 = analogRead(JOYSTICK_X);
+  rawJoystick1 = analogRead(JOYSTICK_Y);
+  command[0] = map(rawJoystick0, 0, 1023, 0, 180);
+  command[1] = map(rawJoystick1, 0, 1023, 0, 180);
+  radio.write(command, sizeof(command));
 }
